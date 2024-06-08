@@ -45,8 +45,10 @@ export class GameComponent {
       this.currentCard = this.game.stack.pop();
       this.pickCardAnimation = true;
       this.game.playedCard.push(this.currentCard);
-      // console.log('new card', this.currentCard);
-      // console.log('Game', this.game);
+
+      this.game.currentPlayer++;
+
+      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
 
       setTimeout(() => {
         this.pickCardAnimation = false;
@@ -58,7 +60,9 @@ export class GameComponent {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe((name: string) => {
-      this.game.players.push(name)
+      if(name && name.length > 0) {
+        this.game.players.push(name)
+      }
     });
   }
 }

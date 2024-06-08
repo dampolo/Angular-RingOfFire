@@ -1,8 +1,8 @@
 <mat-card>
     <mat-card-header>
       <mat-card-title-group>
-        <mat-card-title>{{ title }}</mat-card-title>
-        <mat-card-subtitle>{{ description }}</mat-card-subtitle>
+        <mat-card-title>{{ card ? title  : 'Please pick a card'}}</mat-card-title>
+        <mat-card-subtitle>{{ card ? description : 'Click on the button + to input the player'}}</mat-card-subtitle>
       </mat-card-title-group>
     </mat-card-header>
 </mat-card>
