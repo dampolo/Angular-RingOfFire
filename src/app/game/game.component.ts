@@ -1,47 +1,64 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Game } from '../../models/game';
+import { PlayerComponent } from '../player/player.component';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+
+import { MatDialog } from '@angular/material/dialog';
+import { GameInfoComponent } from '../game-info/game-info.component';
+
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    PlayerComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatButtonModule,
+    GameInfoComponent,
+  ],
   templateUrl: './game.component.html',
-  styleUrl: './game.component.scss'
+  styleUrl: './game.component.scss',
 })
-
 export class GameComponent {
   pickCardAnimation = false;
-// na string potem zmienic
+  // na string potem zmienic
   currentCard: any = '';
   game!: Game;
-
-  constructor() {
-  }
+  
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.newGame()
-
+    this.newGame();
   }
   newGame() {
     this.game = new Game();
-    console.log(this.game);
   }
 
-  takeCard(){
-    this.currentCard = this.game.stack.pop();
-    this.pickCardAnimation = true;
+  takeCard() {
+    if (!this.pickCardAnimation) {
+      this.currentCard = this.game.stack.pop();
+      this.pickCardAnimation = true;
+      this.game.playedCard.push(this.currentCard);
+      // console.log('new card', this.currentCard);
+      // console.log('Game', this.game);
 
-  //   if(!this.pickCardAnimation) {
-  //     let testCard = this.game.stack.pop();
-  //     if(testCard != undefined){
-  //       this.currentCard = testCard;
-  //       console.log(this.currentCard);
-  //     }
-  //   }
-  //   this.pickCardAnimation = true;    
-  //   setTimeout(() => {
-  //   this.pickCardAnimation = false;    
-  //   }, 1000);
+      setTimeout(() => {
+        this.pickCardAnimation = false;
+      }, 1000);
+    }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+
+    dialogRef.afterClosed().subscribe((name: string) => {
+      this.game.players.push(name)
+    });
   }
 }
