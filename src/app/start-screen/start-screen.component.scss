@@ -1,28 +1,27 @@
 .start-screen {
     background-color: #404040;
-    width: 100vw;
+    background-image: url("./../../assets/img/card.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100%;
     height: 100vh;
     max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    img {
-        height: 100vh;
-        object-fit: cover;
-    }
+    position: relative;
 }
 
 .start-label-component {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 350px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    text-align: center;
     button {
         cursor: pointer;
-        width: 10.5rem;
-        height: auto;
+        width: 7rem;
+        height: 2rem;
         border-radius: 1rem;
         background-color: burlywood;
         &:hover {

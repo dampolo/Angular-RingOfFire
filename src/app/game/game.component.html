@@ -1,24 +1,25 @@
 
 
 @for(player of game.players; track player; let index = $index){
-    <app-player [ngStyle]= "{'top.px': 60 + ( index * 90)}" class="player-position" [name]="player" [playerActive]="index === game.currentPlayer"> </app-player>
+    <app-player [ngStyle]= "{'top.px': 60 + ( index * 90)}" class="player-position" [name]="player" 
+    [playerActive]="index === game.currentPlayer"> </app-player>
 }
 
 <div class="game-filed">
     <div class="card-stack">
         @for (count of [0, 1, 2, 3]; track count; let index = $index) {
-            <img [ngStyle]= "{'right.px': index * 5}"  src="/assets/img/cards/card_cover.png" alt="" >
+            <img [ngStyle]= "{'right.px': index * 5}"  src="assets/img/cards/card_cover.png" alt="" >
         }
         <img (click)="takeCard()" class="top-card" style = "right: 25px" 
-            src="/assets/img/cards/card_cover.png" alt="" >
+            src="assets/img/cards/card_cover.png" alt="" >
         @if(pickCardAnimation){
             <img  (click)="takeCard()" class="pick-card" style="right: 25px" 
-            src="/assets/img/cards/{{ currentCard }}.png" alt="" >
+            src="assets/img/cards/{{ currentCard }}.png" alt="" >
         }
 
         @for (card of game.playedCard; track card) {
             <!-- <img [ngStyle]= "{'right.px': index * 5}"  src="/assets/img/cards/card_cover.png" alt="" > -->
-        <img class="played-card" style="right: 25px"  src="/assets/img/cards/{{ card }}.png" alt="">
+        <img class="played-card" style="right: 25px"  src="assets/img/cards/{{ card }}.png" alt="">
         }
     </div>
     
